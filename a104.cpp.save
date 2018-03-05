@@ -1,0 +1,35 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int num;
+    while(cin>>num) {
+        int out[num];
+        int arr[num];
+        for(int a=0; a<num; a++) {
+            cin>>arr[a];
+        }
+        out[0]=*min_element(arr,arr+num);
+        *min_element(arr,arr+num)-=1;
+
+        for(int a=0; a<num; a++) {
+            
+            for(int b=0; b<num; b++) {
+                if(arr[b]>=out[a] && arr[b]!=-1) {
+                    out[a]=arr[b];
+                    arr[b]-=1;
+                    break;
+                }
+            }
+        }
+        for(int a=0; a<num; a++) {
+
+            cout<<out[a]<<" ";
+        }
+        cout<<"\n";
+
+
+    }
+}

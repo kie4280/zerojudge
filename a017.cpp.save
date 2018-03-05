@@ -1,0 +1,212 @@
+#include<iostream>
+#include<cstdlib>
+#include<cmath>
+
+
+using namespace std;
+
+
+string a;
+
+int number=0,operatorlength=0,operandlength=0;
+int operators[1000]= {0};
+int operands[1000]= {0};
+
+
+int main()
+{
+ while(getline(cin,a))
+  {
+   operatorlength=0;
+   operandlength=0;
+
+   for(int i=0; i<a.length(); i++)
+    {
+     if(isdigit(a[i])==true)
+      {
+       number=0;
+
+       for(; isdigit(a[i]); i++)
+        {
+         number*=10;
+         number+=(a[i]-'0');
+
+        }
+       i-=1;
+       operands[operandlength++]=number;
+
+      }
+
+     else
+      {
+       switch(a[i])
+        {
+         case '*':
+         case '/':
+         case'%':
+          while(operatorlength>0)
+           {
+            if(operators[operatorlength-1]=='*')
+             {
+              operands[operandlength-2]*=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='/')
+             {
+              operands[operandlength-2]/=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='%')
+             {
+              operands[operandlength-2]%=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+             else
+                break;
+
+           }
+          operators[operatorlength++]=a[i];
+
+          break;
+
+         case '+':
+         case '-':
+          while(operatorlength>0)
+           {
+            if(operators[operatorlength-1]=='+')
+             {
+              operands[operandlength-2]+=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='-')
+             {
+              operands[operandlength-2]-=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='*')
+             {
+              operands[operandlength-2]*=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='/')
+             {
+              operands[operandlength-2]/=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='%')
+             {
+              operands[operandlength-2]%=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+             else
+                break;
+
+           }
+          operators[operatorlength++]=a[i];
+
+          break;
+
+         case '(':
+          operators[operatorlength++]=a[i];
+          break;
+
+         case ')':
+          for(int i=operatorlength; operators[i]!='('; i--)
+           {
+            if(operators[operatorlength-1]=='*')
+             {
+              operands[operandlength-2]*=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='/')
+             {
+              operands[operandlength-2]/=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='%')
+             {
+              operands[operandlength-2]%=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='+')
+             {
+              operands[operandlength-2]+=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+            else if(operators[operatorlength-1]=='-')
+             {
+              operands[operandlength-2]-=operands[operandlength-1];
+              operandlength--;
+              operatorlength--;
+             }
+
+             //cout<<operands[operandlength-1]<<endl;
+
+           }
+          operators[operatorlength++]=a[i];
+
+
+          break;
+
+        }
+
+       //cout<<operands[operandlength-1]<<endl;
+      }
+
+
+
+    }
+
+ for(; operatorlength>0; operatorlength--)
+    {
+    
+     if(operators[operatorlength-1]=='*')
+      {
+       operands[operandlength-2]*=operands[operandlength-1];
+       operandlength--;
+      }
+     else if(operators[operatorlength-1]=='/')
+      {
+       operands[operandlength-2]/=operands[operandlength-1];
+       operandlength--;
+      }
+      else if(operators[operatorlength-1]=='%')
+      {
+       operands[operandlength-2]%=operands[operandlength-1];
+       operandlength--;
+      }
+     else if(operators[operatorlength-1]=='+')
+      {
+       operands[operandlength-2]+=operands[operandlength-1];
+       operandlength--;
+      }
+     else if(operators[operatorlength-1]=='-')
+      {
+       operands[operandlength-2]-=operands[operandlength-1];
+       operandlength--;
+      }
+
+
+
+
+    }
+
+   cout<<operands[0]<<endl;
+
+
+  }
+ return 0;
+
+}

@@ -1,0 +1,18 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int a, b;
+
+    while(cin>>a>>b) {
+        int x=(int)(sqrt(2*b+pow(a,2))-a);
+        for(;x*(x+a*2-1)<=2*b;){
+            x++;
+        }
+        cout<<x<<"\n";
+
+
+    }
+}

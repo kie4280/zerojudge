@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int num;
+    string a;
+    cin>>num;
+    for(int i=0; i<num; i++) {
+        cin>>a;
+        int output=1;
+        for(int x=0; x<a.; x++) {
+            cout<<a[x]-'0'<<"sizeof"<<a.length()<<"\n";
+        }
+        cout<<output<<"\n";
+
+    }
+    return 0;
+
+
+
+}
